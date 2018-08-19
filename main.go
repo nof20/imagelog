@@ -74,6 +74,9 @@ func saveToSheet(ctx context.Context, r *http.Request) {
 		log.Errorf(ctx, "Unable to retrieve Sheets client: %v", err)
 	}
 	spreadsheetID := os.Getenv("SHEET_ID")
+	if spreadsheetID == "" {
+		log.Errorf(ctx, "Environment variable SHEET_ID is not set")
+	}
 	sheet := "Log"
 	var vr sheets.ValueRange
 	vr.Values = append(vr.Values, results)
